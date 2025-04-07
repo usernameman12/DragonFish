@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at center, #300308, #000);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+}
+
+.logo {
+    font-size: 3em;
+    color: #ff3c3c;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.1em;
+    color: #ccc;
+    margin: 10px 0 30px;
+}
+
+input[type="text"] {
+    padding: 14px 20px;
+    width: 300px;
+    max-width: 90%;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    background: #1c1c1c;
+    color: #fff;
+    box-shadow: inset 0 0 5px rgba(255, 60, 60, 0.5);
+    outline: none;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff3c3c, #c80000);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 60, 60, 0.8);
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.loader {
+    border: 4px solid #222;
+    border-top: 4px solid #ff3c3c;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 0.8s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.history-container {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 60, 60, 0.2);
+}
+
+.history-title {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #ff3c3c;
+    text-align: left;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 60, 60, 0.1);
+    transition: background 0.2s;
+    border-radius: 6px;
+}
+
+.history-item:hover {
+    background: rgba(255, 60, 60, 0.1);
+}
+
+.history-url {
+    color: #ff8484;
+    text-decoration: none;
+}
+
+.timestamp {
+    color: #bbb;
+    font-size: 0.85em;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #555;
+}

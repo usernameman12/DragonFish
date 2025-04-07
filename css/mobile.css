@@ -1,0 +1,133 @@
+:root {
+    --bg: #000;
+    --primary: #ff3c3c;
+    --text: #fff;
+    --muted: #aaa;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: radial-gradient(circle at center, #300308, var(--bg));
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .logo {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: var(--text);
+    font-size: 1rem;
+    box-shadow: inset 0 0 5px rgba(255, 60, 60, 0.4);
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 14px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--primary), #c80000);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+    margin-bottom: 20px;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .loader {
+    border: 4px solid #222;
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+    display: none;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .history {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(255, 60, 60, 0.2);
+  }
+
+  .history h2 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 60, 60, 0.1);
+    font-size: 0.9rem;
+  }
+
+  .history-item a {
+    color: #ff8484;
+    text-decoration: none;
+    max-width: 70%;
+    word-break: break-all;
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  footer {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+  }
