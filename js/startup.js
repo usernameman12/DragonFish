@@ -15,7 +15,7 @@ function detectDevice() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const deviceInfo = document.getElementById('device-info-text');
 
-    deviceInfo.innerHTML = '<i class="fas fa-search icon"></i> Scanning your device configuration...';
+    deviceInfo.innerHTML = '<i class="fas fa-search icon"></i> Scanning your device config...';
     
     setTimeout(() => {
         if (isMobile) {
