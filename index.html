@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>RED | DragonFish</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Segoe UI', sans-serif;
+			background: radial-gradient(circle at center, #300308, #000);
+			color: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		.container {
+			text-align: center;
+			padding: 30px;
+			margin-top: 60px;
+		}
+
+		.logo {
+			font-size: 3em;
+			color: #ff3c3c;
+			margin-bottom: 10px;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 2em;
+		}
+
+		p {
+			font-size: 1.1em;
+			color: #ccc;
+			margin: 10px 0 30px;
+		}
+
+		input[type="text"] {
+			padding: 14px 20px;
+			width: 300px;
+			max-width: 90%;
+			border: none;
+			border-radius: 12px;
+			font-size: 1em;
+			background: #1c1c1c;
+			color: #fff;
+			box-shadow: inset 0 0 5px rgba(255, 60, 60, 0.5);
+			outline: none;
+		}
+
+		.btn {
+			margin-top: 20px;
+			padding: 12px 25px;
+			font-size: 1em;
+			border: none;
+			border-radius: 30px;
+			cursor: pointer;
+			background: linear-gradient(135deg, #ff3c3c, #c80000);
+			color: white;
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			box-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+		}
+
+		.btn:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 15px rgba(255, 60, 60, 0.8);
+		}
+
+		.btn i {
+			margin-right: 8px;
+		}
+
+		.loader {
+			border: 4px solid #222;
+			border-top: 4px solid #ff3c3c;
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			animation: spin 0.8s linear infinite;
+			margin: 20px auto;
+			display: none;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		.history-container {
+			width: 90%;
+			max-width: 800px;
+			margin-top: 50px;
+			background: rgba(255, 255, 255, 0.03);
+			border-radius: 12px;
+			padding: 20px;
+			box-shadow: 0 0 20px rgba(255, 60, 60, 0.2);
+		}
+
+		.history-title {
+			font-size: 1.4em;
+			margin-bottom: 10px;
+			color: #ff3c3c;
+			text-align: left;
+		}
+
+		.history-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 12px 16px;
+			border-bottom: 1px solid rgba(255, 60, 60, 0.1);
+			transition: background 0.2s;
+			border-radius: 6px;
+		}
+
+		.history-item:hover {
+			background: rgba(255, 60, 60, 0.1);
+		}
+
+		.history-url {
+			color: #ff8484;
+			text-decoration: none;
+		}
+
+		.timestamp {
+			color: #bbb;
+			font-size: 0.85em;
+		}
+
+		footer {
+			margin-top: 30px;
+			font-size: 0.9em;
+			color: #555;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="logo"><i class="fas fa-rocket"></i></div>
+		<h1>DragonFish</h1>
+		<p>Enter a domain to launch</p>
+		<input type="text" id="urlInput" placeholder="example.com">
+		<br>
+		<button class="btn" onclick="launch()">
+      <i class="fas fa-paper-plane"></i> Launch
+    </button>
+		<div class="loader" id="loader"></div>
+	</div>
+
+	<div class="history-container">
+		<div class="history-title"><i class="fas fa-clock"></i> Launch History</div>
+		<div id="historyList"></div>
+	</div>
+
+	<footer>Powered by RED | <i class="fas fa-shield-alt"></i> LupineVault</footer>
+
+	<script>
+		function formatDate() {
+      const now = new Date();
+      return now.toLocaleString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+    }
+
+    function saveHistory(domain) {
+      const entry = {
+        url: `https://${domain}`,
+        timestamp: formatDate()
+      };
+      let history = JSON.parse(localStorage.getItem("red_history") || "[]");
+      history.unshift(entry);
+      localStorage.setItem("red_history", JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem("red_history") || "[]");
+      const list = document.getElementById("historyList");
+      list.innerHTML = "";
+
+      history.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "history-item";
+        row.innerHTML = `
+          <a class="history-url" href="${item.url}" target="_blank">${item.url}</a>
+          <span class="timestamp">${item.timestamp}</span>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function launch() {
+      const input = document.getElementById("urlInput");
+      const domain = input.value.trim();
+      if (!domain) return alert("Please enter a valid domain.");
+
+      document.getElementById("loader").style.display = "block";
+
+      setTimeout(() => {
+        const formattedUrl = `https://${domain}`;
+        const fullPath = `../static/iframe.html#${formattedUrl}`;
+        const newTab = window.open("about:blank");
+        newTab.location = fullPath;
+
+        saveHistory(domain);
+        document.getElementById("loader").style.display = "none";
+        input.value = "";
+      }, 1000); // simulate load delay for coolness
+    }
+
+    renderHistory();
+	</script>
+
+</body>
+
+</html>
