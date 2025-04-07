@@ -21,12 +21,12 @@ function detectDevice() {
         if (isMobile) {
             deviceInfo.innerHTML = '<i class="fas fa-mobile-alt icon"></i> Mobile device detected. Redirecting...';
             setTimeout(() => {
-                window.location.href = '../public/mobile.html';
+                window.location.href = '../src/mobile.html';
             }, 1500);
         } else {
             deviceInfo.innerHTML = '<i class="fas fa-desktop icon"></i> Desktop device detected. Redirecting...';
             setTimeout(() => {
-                window.location.href = '../public/computer.html';
+                window.location.href = '../src/computer.html';
             }, 1500);
         }
     }, 1000);
