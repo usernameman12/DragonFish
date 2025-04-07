@@ -203,7 +203,7 @@
       const domain = input.value.trim();
       if (!domain) return alert("Enter a valid domain.");
 
-      const formattedUrl = `https://${domain}`;
+      const formattedUrl = `../static/iframe.html#https://${domain}`;
       document.getElementById("loader").style.display = "block";
 
       setTimeout(() => {
