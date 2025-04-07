@@ -195,9 +195,9 @@
 
       history.forEach(item => {
         const row = document.createElement("div");
-        row.className = "history-item";
+        row.className = "history-item"; // update to fix history bugs (history was redirecting to the main url. istead of the proxied one)
         row.innerHTML = `
-          <a class="history-url" href="${item.url}" target="_blank">${item.url}</a>
+          <a class="history-url" href="../static/iframe.html#${item.url}" target="_blank">${item.url}</a>
           <span class="timestamp">${item.timestamp}</span>
         `;
         list.appendChild(row);
