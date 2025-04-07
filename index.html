@@ -204,24 +204,49 @@
       });
     }
 
-    function launch() {
-      const input = document.getElementById("urlInput");
-      const domain = input.value.trim();
-      if (!domain) return alert("Please enter a valid domain.");
+	function launch() {
+  const input = document.getElementById("urlInput");
+  const domain = input.value.trim();
+  if (!domain) return alert("Please enter a valid domain.");
 
-      document.getElementById("loader").style.display = "block";
+  const formattedUrl = `https://${domain}`;
+  document.getElementById("loader").style.display = "block";
 
-      setTimeout(() => {
-        const formattedUrl = `https://${domain}`;
-        const fullPath = `../static/iframe.html#${formattedUrl}`;
-        const newTab = window.open("about:blank");
-        newTab.location = fullPath;
+  setTimeout(() => {
+    const newTab = window.open("about:blank");
+    const iframeHtml = `
+      <html>
+        <head>
+          <title>Loading...</title>
+          <style>
+            html, body {
+              margin: 0;
+              padding: 0;
+              height: 100%;
+              overflow: hidden;
+              background: black;
+            }
+            iframe {
+              border: none;
+              width: 100%;
+              height: 100%;
+            }
+          </style>
+        </head>
+        <body>
+          <iframe src="${formattedUrl}" allowfullscreen></iframe>
+        </body>
+      </html>
+    `;
 
-        saveHistory(domain);
-        document.getElementById("loader").style.display = "none";
-        input.value = "";
-      }, 1000); // simulate load delay for coolness
-    }
+    newTab.document.write(iframeHtml);
+    newTab.document.close();
+
+    saveHistory(domain);
+    document.getElementById("loader").style.display = "none";
+    input.value = "";
+  }, 1000); // simulated delay for coolness
+}
 
     renderHistory();
 	</script>
